@@ -42,8 +42,7 @@ const scissors = document.getElementById('scissors');
 const newGameBtn = document.getElementById('new-game');
 
 
-updateScore();
-checkGameOver();
+
 
 function newGame() {
     userScore = 0;
@@ -58,24 +57,21 @@ function newGame() {
 
 
 function playRound() {
-    checkGameOver();
     getComputerChoice();
 
     //Start comparing choices to determine the winner
 
     if (userChoice === computerChoice) {
         announce.innerText = `You choose: ${userChoice} while CPU choose: ${computerChoice} so this round is a tie`;
-        alert("tie");
     } else if (userChoice === "rock") {
         computerChoice === "paper" ? announce.innerText = `computer wins ${computerScore += 1}` : announce.innerText = ` user wins ${userScore += 1}`;
-        updateScore();
     } else if (userChoice === "paper") {
         computerChoice === "scissors" ? announce.innerText = `computer wins ${computerScore += 1}` : announce.innerText = ` user wins ${userScore += 1}`;
-        updateScore();
     } else if (userChoice === "scissors") {
         computerChoice === "rock" ? announce.innerText = `computer wins ${computerScore += 1}` : announce.innerText = ` user wins ${userScore += 1}`;
-        updateScore();
     }
+    updateScore();
+    checkGameOver();
 }
 
 function getComputerChoice() {
@@ -85,18 +81,16 @@ function getComputerChoice() {
 
 function updateScore() {
     score.innerText = `USER: ${userScore} \\ CPU: ${computerScore}`;
-    if (userScore >= 3 || computerScore >= 3) { //check for game over
-        choices.style.display === "none";
-        console.log("game over")
-        announce.innerText = `Game over! ${score}, Click new game to start again.`;
-    }
 }
 
+
+// Check for max score to stop the game
 function checkGameOver() {
-    if (userScore >= 3 || computerScore >= 3) { //check for game over
-        choices.style.display === "none";
-        console.log("game over")
-        announce.innerText = `Game over! ${score}, Click new game to start again.`;
+    if (userScore >= 3 || computerScore >= 3) { 
+        announce.innerText = `Game over! ${score.innerText}, Click new game to start again.`;
+        userScore=0;
+        computerScore=0;
+        updateScore();
     }
 }
 
