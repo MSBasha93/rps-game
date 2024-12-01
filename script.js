@@ -86,28 +86,34 @@ function updateScore() {
 
 // Check for max score to stop the game
 function checkGameOver() {
-    if (userScore >= 3 || computerScore >= 3) { 
+    if (userScore >= 5 || computerScore >= 5) {
         announce.innerText = `Game over! ${score.innerText}, Click new game to start again.`;
-        userScore=0;
-        computerScore=0;
+        userScore = 0;
+        computerScore = 0;
         updateScore();
     }
 }
 
 
-newGameBtn.addEventListener("click", newGame);
-rock.addEventListener("click", () => {
-    userChoice = "rock";
-    playRound();
+document.body.addEventListener("click", event => {
+    switch (event.target) {
+        case rock:
+            userChoice = "rock";
+            playRound();
+            break;
+        case paper:
+            userChoice = "paper";
+            playRound();
+            break;
+        case scissors:
+            userChoice = "scissors";
+            playRound();
+            break;
+        case newGameBtn:
+            newGame();
+            break;
+    }
 
-});
-paper.addEventListener("click", () => {
-    userChoice = "paper";
-    playRound();
-});
-scissors.addEventListener("click", () => {
-    userChoice = "scissors";
-    playRound();
 });
 
 
